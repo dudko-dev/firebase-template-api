@@ -9,9 +9,9 @@ env:
   FIREBASE_PROJECT: "production"
   GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase/functions/accounts/production.json
   BRANCH: "main"
-  FIREBASE_PARENT_REPO: "firebase-template/firebase"
+  FIREBASE_PARENT_REPO: "dudko-dev/firebase-template"
   FIREBASE_PARENT_BRANCH: "main"
-  FIREBASE_CHILD_REPO: "firebase-template/functions"
+  FIREBASE_CHILD_REPO: "dudko-dev/firebase-template-functions"
   FIREBASE_CHILD_BRANCH: "main"
   SITE_DIR: "api"
   FIREBASE_SITE_ALIAS: "api"
