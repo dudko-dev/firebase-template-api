@@ -1,0 +1,16 @@
+{
+  "name": "localhost-dev-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dev-server.js",
+  "scripts": {
+    "start": "node dev-server"
+  },
+  "author": "Siarhei Dudko <sergey@dudko.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment-timezone": "^0.5.40",
+    "morgan": "^1.10.0"
+  }
+}

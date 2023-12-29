@@ -1,0 +1,140 @@
+openapi: 3.0.0
+info:
+  description: Methods for working with Firebase Template API
+  version: 1.1.0
+  title: Firebase Template API
+servers:
+  - url: https://fir-template-api.web.app/v1
+    description: Production API server v1
+components:
+  securitySchemes:
+    accessBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    UserDataRequest:
+      description: User Model Data (Request)
+      type: object
+      properties:
+        email:
+          description: User email (authentication)
+          type: string
+      example:
+        email: "user@dudko.dev"
+    PingPongResponse:
+      description: Ping
+      type: object
+      properties:
+        ping:
+          type: boolean
+          enum:
+            - true
+  responses:
+    UserDataResponse:
+      description: User Model Data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: User ID
+                type: string
+              email:
+                description: User email (authentication)
+                type: string
+            example:
+              id: "feNPuw3IfuW4x39BJG98dukYfhY2"
+              email: "user@dudko.dev"
+    PingPongResponse:
+      description: Pong
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              pong:
+                type: boolean
+                enum:
+                  - true
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            description: Response error
+            type: object
+            example:
+              message: Invalid arguments
+tags:
+  - name: /user
+    description: Get or edit main user data
+  - name: /ping
+    description: A service API for to check the status
+paths:
+  "/user":
+    get:
+      tags:
+        - /user
+      description: Get main user data
+      operationId: userGet
+      security:
+        - accessBearerAuth: []
+      responses:
+        "200":
+          $ref: "#/components/responses/UserDataResponse"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "401":
+          $ref: "#/components/responses/ErrorResponse"
+        "403":
+          $ref: "#/components/responses/ErrorResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
+    patch:
+      tags:
+        - /user
+      description: Change main user data
+      operationId: userPatch
+      security:
+        - accessBearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDataRequest"
+        description: Request data
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UserDataResponse"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "401":
+          $ref: "#/components/responses/ErrorResponse"
+        "403":
+          $ref: "#/components/responses/ErrorResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
+  "/ping":
+    get:
+      tags:
+        - /ping
+      description: Check API status
+      operationId: pingGet
+      responses:
+        "200":
+          $ref: "#/components/responses/PingPongResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
+    post:
+      tags:
+        - /ping
+      description: Check API status
+      operationId: pingPost
+      responses:
+        "200":
+          $ref: "#/components/responses/PingPongResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
