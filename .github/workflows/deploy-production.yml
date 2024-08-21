@@ -4,7 +4,7 @@ on:
     branches:
       - main
 env:
-  NODE_VERSION: 20
+  NODE_VERSION: 22
   TOKEN_FOR_WORKFLOW: ${{ secrets.TOKEN_FOR_WORKFLOW }}
   FIREBASE_PROJECT: "production"
   GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase/functions/accounts/production.json
@@ -59,7 +59,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Cache node modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
